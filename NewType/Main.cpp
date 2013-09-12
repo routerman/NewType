@@ -2,31 +2,44 @@
 #include<time.h>
 #include<iostream>
 #include<string>
+
 using namespace std;
+
+string getRandomString(int length){
+	static string alpha("abcdefghijklmnopqrstuvwxyz");
+	string a;
+	unsigned int number;
+	//generate random string
+	srand(time(NULL));
+	number=rand();
+	for(int i=0;i<length;i++){
+		number/=2;
+		a+=alpha[number%26];
+	}
+	return a;
+}
+
+
+
+
 int main(){
-	string alpha("abcdefghijklmnopqrstuvwxyz");
-	string a,b;
-	unsigned int c;
+	string answer,b;
 	while(1){
-		//generate random string
-		srand(time(NULL));
-		c=rand();
-		for(int i=0;i<10;i++){
-			c/=2;
-			a+=alpha[c%26];
-		}
-		cout<<a<<endl;
+		answer=getRandomString(10);
+		cout<<"$";
+		cout<<answer<<endl;
 		//typing
+		cout<<">";
 		cin>>b;
 		//judgement
-		if(a==b){
+		if(answer==b){
 			cout<<"OK!"<<endl;
 		}else{
 			cout<<"Failed"<<endl;
 			break;
 		}
 		//reset
-		a.clear();
+		answer.clear();
 		b.clear();
 	}
 	return 0;
