@@ -18,15 +18,16 @@ public:
 	~NewType();
 	void Proc();
 	void display();
+	void judgement();
 	string getRandomString();
 };
-
+/* constructor */
 NewType::NewType(){
 	alpha.append("abcdefghijklmnopqrstuvwxyz");
 	length=10;
 	count=0;
 }
-
+/* decstructor */
 NewType::~NewType(){}
 
 /* generate random string */
@@ -41,32 +42,35 @@ string NewType::getRandomString(){
 	return a;
 }
 
+/* display */
 void NewType::display(){
+	time(&s_start);
+	cout<<"["<<count<<"]";
+	cout<<answer<<endl;
+	//typing
+	cout<<"-->";
+	cin>>input;
+	time(&s_finish);
+}
+
+/* judgement */
+void NewType::judgement(){
+	if(answer==input){
+		cout<<"OK!"<<endl;
+		second=difftime(s_finish,s_start);
+		cout<<second<<endl;
+		count++;
+	}else{
+		cout<<"Failed"<<endl;
+	}
 }
 
 void NewType::Proc(){
 	time(&start);
 	while(count<4){
 		answer=getRandomString();
-
-		time(&s_start);
 		display();
-		cout<<"["<<count<<"]";
-		cout<<answer<<endl;
-		//typing
-		cout<<"-->";
-		cin>>input;
-		time(&s_finish);
-		
-		//judgement
-		if(answer==input){
-			cout<<"OK!"<<endl;
-			second=difftime(s_finish,s_start);
-			cout<<second<<endl;
-			count++;
-		}else{
-			cout<<"Failed"<<endl;
-		}
+		judgement();
 		//reset
 		answer.clear();
 		input.clear();
