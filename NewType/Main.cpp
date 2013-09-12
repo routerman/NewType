@@ -2,14 +2,33 @@
 #include<time.h>
 #include<iostream>
 #include<string>
-
 using namespace std;
 
-string getRandomString(int length){
-	static string alpha("abcdefghijklmnopqrstuvwxyz");
+class NewType{
+	string alpha;
+	string answer;
+	string input;
+	int length;
+	int count;
+public:
+	NewType();
+	~NewType();
+	void Proc();
+	string getRandomString();
+};
+
+NewType::NewType(){
+	alpha.append("abcdefghijklmnopqrstuvwxyz");
+	length=10;
+	count=0;
+}
+
+NewType::~NewType(){}
+
+/* generate random string */
+string NewType::getRandomString(){
 	string a;
 	unsigned int number;
-	//generate random string
 	srand(time(NULL));
 	number=rand();
 	for(int i=0;i<length;i++){
@@ -19,28 +38,30 @@ string getRandomString(int length){
 	return a;
 }
 
-
-
-
-int main(){
-	string answer,b;
+void NewType::Proc(){
 	while(1){
-		answer=getRandomString(10);
-		cout<<"$";
+		answer=getRandomString();
+		cout<<"["<<count<<"]";
 		cout<<answer<<endl;
 		//typing
-		cout<<">";
-		cin>>b;
+		cout<<"-->";
+		cin>>input;
 		//judgement
-		if(answer==b){
+		if(answer==input){
 			cout<<"OK!"<<endl;
+			count++;
 		}else{
 			cout<<"Failed"<<endl;
-			break;
 		}
 		//reset
 		answer.clear();
-		b.clear();
+		input.clear();
 	}
+}
+
+/* main function */
+int main(){
+	NewType *nt = new NewType();
+	nt->Proc();
 	return 0;
 }
