@@ -27,8 +27,24 @@ NewType::NewType(){
 	length=10;
 	count=0;
 }
+
 /* decstructor */
 NewType::~NewType(){}
+
+void NewType::Proc(){
+	time(&start);
+	while(count<4){
+		answer=getRandomString();
+		display();
+		judgement();
+		//reset
+		answer.clear();
+		input.clear();
+	}
+	time(&finish);
+	second=difftime(finish,start);
+	cout<<second<<endl;
+}
 
 /* generate random string */
 string NewType::getRandomString(){
@@ -65,20 +81,6 @@ void NewType::judgement(){
 	}
 }
 
-void NewType::Proc(){
-	time(&start);
-	while(count<4){
-		answer=getRandomString();
-		display();
-		judgement();
-		//reset
-		answer.clear();
-		input.clear();
-	}
-	time(&finish);
-	second=difftime(finish,start);
-	cout<<second<<endl;
-}
 
 /* main function */
 int main(){
